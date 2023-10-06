@@ -1,0 +1,39 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="uk-UK">
+<head>
+    <meta charset="UTF-8">
+    <title>main page</title>
+    <link rel="stylesheet" type="text/css" href="{% static 'styles_links_as_buttons.css' %}">
+</head>
+<body>
+<header>
+    <h2>{% block name_page %}{% endblock %}</h2>
+    <div class="topMenu">
+        <ul class="title" title="name">
+            <li><a href="/about?name=test">про нас</a></li>
+            <li><a href="/general_reports">Загальні звіти про допомогу</a></li>
+            <li><a href="/feedback">Подяки відгуки</a></li>
+            <li><a href="/login">вхід</a></li>
+            <li><a href="/user_registration">реєстрація</a></li>
+        </ul>
+    </div>
+</header>
+
+{% block content %}
+{% endblock %}
+<footer>
+    <div>
+        <ul class="title" title="name">
+            <li><a href="/index">На головну</a></li>
+            <li><a href="/partners">Наші партнери</a></li>
+            <li><a href="/partners/new">Стати партнером</a></li>
+            <li><a href="/finance_the_project">Підтримати проект</a></li>
+            <li><a href="/police">Сповістити про шахрайство</a></li>
+        </ul>
+    </div>
+</footer>
+<p> test main page</p>
+<p> друкує українську</p>
+</body>
+</html>

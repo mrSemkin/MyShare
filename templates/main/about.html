@@ -1,13 +1,8 @@
-<!DOCTYPE html>
-<html lang="uk-UK">
-<head>
-    <meta charset="UTF-8">
-    <title>About page</title>
-</head>
-<body>
-<h1>About page</h1>
-<p> About page test</p>
-<p> друкує українську</p>
-
-</body>
-</html>
+{% extends 'main/base._layout.html'%}
+{% block content %}
+    {% include 'main/content_about.html' %}
+{% endblock %}
+{% block name_page %}
+    {{ name }}
+    ABOUT PAGE
+{% endblock %}

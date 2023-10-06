@@ -1,0 +1,27 @@
+/* styles_links_as_buttons.css */
+
+/* Style for the links that look like buttons */
+ul.title {
+  list-style-type: none;
+  padding: 0;
+}
+
+ul.title li {
+  display: inline;
+  margin-right: 10px;
+}
+
+ul.title li a {
+  display: inline-block;
+  padding: 10px 20px;
+  background-color: #007BFF; /* Change this to your desired button color */
+  color: #fff; /* Text color */
+  text-decoration: none;
+  border: 1px solid #007BFF; /* Add a border for button-like appearance */
+  border-radius: 5px; /* Rounded corners for buttons */
+  transition: background-color 0.3s ease; /* Smooth color transition on hover */
+}
+
+ul.title li a:hover {
+  background-color: #0056b3; /* Change this to the hover color you prefer */
+}

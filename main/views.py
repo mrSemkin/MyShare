@@ -6,4 +6,10 @@ def index(request):
 
 def about(request):
     # return HttpResponse("<h1>About page</h1")
-    return render(request, 'main/about.html')
+    print(request.GET);
+    print(request.POST);
+    ddd = {'name': request.GET.get('name')};
+    return render(request, 'main/about.html', ddd);
+
+def style(request):
+    return

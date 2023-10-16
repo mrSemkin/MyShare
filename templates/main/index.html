@@ -1,12 +1,18 @@
-<!DOCTYPE html>
-<html lang="uk-UK">
-<head>
-    <meta charset="UTF-8">
-    <title>main page</title>
-</head>
-<body>
-<h1>main page</h1>
-<p> test main page</p>
-<p> друкує українську</p>
-</body>
-</html>
+{% extends 'main/base._layout.html' %}
+
+{% block sub_header %}
+{% endblock %}
+
+{% block content %}
+    {% include 'main/indexc_ontent.html' %}
+    <button type="button">хочу допомогти</button><br>
+    <button type="button">подати запит на допомогу</button><br>
+    <button type="button">Мониторинг волантеру</button><br>
+
+
+{% endblock %}
+
+{% block work_comments %}
+    {{ url }}
+    START PAGE
+{% endblock %}

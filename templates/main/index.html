@@ -1,28 +1,18 @@
-<!DOCTYPE html>
-<html lang="uk-UK">
-<head>
-    <meta charset="UTF-8">
-    <title>main page</title>
-</head>
-<body>
-<h2>main page</h2>
-<ul title="name">
-    <li><a href=" /about?name=test">про нас</a></li>
+{% extends 'main/base._layout.html' %}
 
-    <li><a href=" /general_reports">Загальні звіти про допомогу</a></li>
-    <li><a href=" /feedback">Подяки відгуки</a></li>
-    <li><a href=" /login">вхід</a></li>
-    <li><a href=" /user_registration">регістрація</a></li>
-<p></p>
+{% block sub_header %}
+{% endblock %}
 
-    <li><a href=" /index">На головну</a></li>
-    <li><a href=" /partners">Наші партнери</a></li>
-    <li><a href=" /partners\new">Стати партнером</a></li>
-    <li><a href=" /finance_the_project">Підтримати проект</a></li>
-    <li><a href=" /police">Сповістити про шахрайство</a></li>
+{% block content %}
+    {% include 'main/indexc_ontent.html' %}
+    <button type="button">хочу допомогти</button><br>
+    <button type="button">подати запит на допомогу</button><br>
+    <button type="button">Мониторинг волантеру</button><br>
 
-</ul>
-<p> test main page</p>
-<p> друкує українську</p>
-</body>
-</html>
+
+{% endblock %}
+
+{% block work_comments %}
+    {{ url }}
+    START PAGE
+{% endblock %}

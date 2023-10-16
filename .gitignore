@@ -9,5 +9,6 @@ cmake-build-debug
 # Datasource local storage ignored files
 /dataSources/
 /dataSources.local.xml
+/DOC/
 /DOC/~$*.xlsx
 /DOC/~$*.xls

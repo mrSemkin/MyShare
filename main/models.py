@@ -1,67 +1,39 @@
-from django.contrib.auth.models import AbstractBaseUser, BaseUserManager, PermissionsMixin
+import logging
 from django.db import models
-from django.core.exceptions import ValidationError
+from django.contrib.auth import get_user_model
 
-class CustomUserManager(BaseUserManager):
-    def create_user(self, username, email, password=None):
-        if not email:
-            raise ValueError('Поле Email повинно бути заповненим')
-        user = self.model(
-            username=username,
-            email=self.normalize_email(email),
-        )
-        user.set_password(password)
-        user.save(using=self._db)
-        return user
+LOGGER = logging.getLogger(name)
+User = get_user_model()
 
-    def create_superuser(self, username, email, password=None):
-        user = self.create_user(
-            username=username,
-            email=email,
-            password=password,
-        )
-        user.is_staff = True
-        user.is_superuser = True
-        user.save(using=self._db)
-        return user
+def str(self):
+    return self.username
 
-class CustomUser(AbstractBaseUser, PermissionsMixin):
-    username = models.CharField(max_length=30, unique=True)
-    email = models.EmailField(unique=True)
+class Donor(models.Model):
+    user = models.OneToOneField(User, on_delete=models.SET_DEFAULT, primary_key=True)
 
-    name = models.CharField(max_length=255)
-    surname = models.CharField(max_length=255)
-    phone_num = models.CharField(max_length=15)
-
-    objects = CustomUserManager()
-
-    USERNAME_FIELD = 'username'
-    REQUIRED_FIELDS = ['email']
-
-    def str(self):
-        return self.username
-
-class Benefactor(CustomUser):
     def save(self, *args, **kwargs):
-        if Benefactor.objects.filter(email=self.email).exclude(id=self.id).exists():
-            raise ValidationError("Email already exists in the database.")
+        if Donor.objects.filter(user__email=self.user.email).exclude(user_id=self.user_id).exists():
+            raise ValidationError("Email вже існує в базі даних.")
         super().save(*args, **kwargs)
 
-class Beneficiary(CustomUser):
+class Beneficiary(models.Model):
+    user = models.OneToOneField(User, on_delete=models.SET_DEFAULT, primary_key=True)
     bank_card_number = models.CharField(max_length=16)
+
     def save(self, *args, **kwargs):
-        if Beneficiary.objects.filter(email=self.email).exclude(id=self.id).exists():
-            raise ValidationError("Email already exists in the database.")
-        if Beneficiary.objects.filter(bank_card_number=self.bank_card_number).exclude(id=self.id).exists():
-            raise ValidationError("Bank card number already exists in the database.")
+        if Beneficiary.objects.filter(user__email=self.user.email).exclude(user_id=self.user_id).exists():
+            raise ValidationError("Email вже існує в базі даних.")
+        if Beneficiary.objects.filter(bank_card_number=self.bank_card_number).exclude(user_id=self.user_id).exists():
+            raise ValidationError("Номер банківської картки вже існує в базі даних.")
         super().save(*args, **kwargs)
+
 
 class Help(models.Model):
     date_of_help = models.DateField()
     kind_of_help = models.CharField(max_length=255)
     status_of_help = models.CharField(max_length=255)
     contain_of_help = models.TextField()
-    benefactor = models.ForeignKey(Benefactor, on_delete=models.PROTECT)
+    donor = models.ForeignKey(Donor, on_delete=models.PROTECT)
     beneficiary = models.ForeignKey(Beneficiary, on_delete=models.PROTECT)
 
 class Suppliers(models.Model):

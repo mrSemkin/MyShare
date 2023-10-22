@@ -1,33 +1,24 @@
-{% load static %}
-{
- margin: 0;
- padding: 0;
- box-sizing: border-box;
-
-}
 
 .form-container {
-  width: 450px; /* Ширина вашей формы */
+  width: 450px;
   height: 410px;
   margin: 0 auto;
-  background: url('sebastian-laverde-RiRAIz1tPX8-unsplash.jpg');
+
+  background: linear-gradient(to bottom right, #6A5ACD, #40E0D0);
   color: #fff;
-  padding-top: 30px; /* Установить отступ сверху */
-  padding-bottom: 30px; /* Установить отступ снизу */
-  padding-left: 40px; /* Установить отступ слева */
-  padding-right: 40px; /* Установить отступ справа */
+  padding-top: 30px;
+  padding-bottom: 30px;
+  padding-left: 40px;
+  padding-right: 30px;
   border-radius: 10px;
-
-
-
-  /* Дополнительные стили для вашей формы */
 }
+
 .form-container h1 {
   font-size:36px;
   text-align:center;
   font-weight: 100;
-  /* Дополнительные стили для вашей формы */
 }
+
 .input-box input{
      width: 410px;
      height: 40px;
@@ -41,12 +32,12 @@
      color:#fff;
      padding: 20px,45px,20px,20px;
      font-weight: 100;
-
 }
 
 .input-box input::placeholder{
-    color: #fff;
+    color: #ADD8E6;
 }
+
 .input-box i{
     position: absolute;
     right: 20px;

@@ -1,0 +1,91 @@
+{% load static %}
+{
+ margin: 0;
+ padding: 0;
+ box-sizing: border-box;
+
+}
+
+.form-container {
+  width: 450px; /* Ширина вашей формы */
+  height: 410px;
+  margin: 0 auto;
+  background: url('sebastian-laverde-RiRAIz1tPX8-unsplash.jpg');
+  color: #fff;
+  padding-top: 30px; /* Установить отступ сверху */
+  padding-bottom: 30px; /* Установить отступ снизу */
+  padding-left: 40px; /* Установить отступ слева */
+  padding-right: 40px; /* Установить отступ справа */
+  border-radius: 10px;
+
+
+
+  /* Дополнительные стили для вашей формы */
+}
+.form-container h1 {
+  font-size:36px;
+  text-align:center;
+  font-weight: 100;
+  /* Дополнительные стили для вашей формы */
+}
+.input-box input{
+     width: 410px;
+     height: 40px;
+     background: transparent;
+     border: none;
+     outline: none;
+     border: 1px solid rgba(255,255,255,.2);
+     margin: 10px;
+     border-radius: 40px;
+     font-size: 15px;
+     color:#fff;
+     padding: 20px,45px,20px,20px;
+     font-weight: 100;
+
+}
+
+.input-box input::placeholder{
+    color: #fff;
+}
+.input-box i{
+    position: absolute;
+    right: 20px;
+    transforme: translate(-50%);
+    font-size: 20px;
+}
+
+.btn-cancel {
+    width: 140px;
+    height: 40px;
+    background: #fff;
+    border: none;
+    outline: none;
+    border-radius: 40px;
+    box-shadow: 0 0 10px rgba(0,0,0,.1);
+    cursor:pointer;
+    font-size: 16px;
+    color: #333;
+    font-weight: 100;
+    margin-top: 15px;
+    margin-left: 13px;
+    text-align: center;
+    float: left;
+}
+.btn-registration
+{
+    width: 140px;
+    height: 40px;
+    background: #fff;
+    border: none;
+    outline: none;
+    border-radius: 40px;
+    box-shadow: 0 0 10px rgba(0,0,0,.1);
+    cursor:pointer;
+    font-size: 16px;
+    color: #333;
+    font-weight: 100;
+    margin-top: 15px;
+    margin-right: 24px;
+    text-align: center;
+    float: right;
+}

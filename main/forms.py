@@ -1,17 +1,39 @@
 from django import forms
 from .models import Donor, Beneficiary, Help, Supplier, Sponsor
+from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 
 
-class DonorForm(forms.ModelForm):
+class NewDonorForm(UserCreationForm):
+    email = forms.EmailField(required=True)
+
     class Meta:
         model = Donor
-        fields = ['user']
+        fields = ("username", "email", "password1", "password2")
+
+    def save(self, commit=True):
+        user = super(NewDonorForm, self).save(commit=False)
+        user.email = self.cleaned_data['email']
+        if commit:
+            user.save()
+            Donor.objects.create(user=user)
+        return user
 
 
-class BeneficiaryForm(forms.ModelForm):
+class NewBeneficiaryForm(UserCreationForm):
+    email = forms.EmailField(required=True)
+    bank_card_number = forms.CharField(max_length=16)
+
     class Meta:
         model = Beneficiary
-        fields = ['user', 'bank_card_number']
+        fields = ("username", "email", "password1", "password2", "bank_card_number")
+
+    def save(self, commit=True):
+        user = super(NewBeneficiaryForm, self).save(commit=False)
+        user.email = self.cleaned_data['email']
+        if commit:
+            user.save()
+            Beneficiary.objects.create(user=user, bank_card_number=self.cleaned_data['bank_card_number'])
+        return user
 
 
 class HelpForm(forms.ModelForm):
@@ -26,7 +48,19 @@ class SupplierForm(forms.ModelForm):
         fields = ['company_name', 'contact_person', 'email', 'phone_num', 'address_optional', 'helps']
 
 
-class SponsorForm(forms.ModelForm):
+class SponsorProfileForm(forms.ModelForm):
     class Meta:
         model = Sponsor
-        fields = ['company_name', 'contact_person', 'email', 'phone_num', 'address_optional', 'type_of_help', 'helps']
+        fields = ['description']
+
+
+class DonorAuthenticationForm(AuthenticationForm):
+    class Meta:
+        model = Donor
+        fields = ["username", "password"]
+
+
+class BeneficiaryAuthenticationForm(AuthenticationForm):
+    class Meta:
+        model = Beneficiary
+        fields = ["username", "password"]

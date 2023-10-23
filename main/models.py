@@ -8,11 +8,13 @@ User = get_user_model()
 
 class Donor(models.Model):
     user = models.OneToOneField(User, on_delete=models.SET_DEFAULT, primary_key=True)
+    objects = models.Manager()
 
 
 class Beneficiary(models.Model):
     user = models.OneToOneField(User, on_delete=models.SET_DEFAULT, primary_key=True)
     bank_card_number = models.CharField(max_length=16)
+    objects = models.Manager()
 
 
 class Help(models.Model):

@@ -7,39 +7,61 @@ User = get_user_model()
 
 
 class Donor(models.Model):
-    user = models.OneToOneField(User, on_delete=models.SET_DEFAULT, primary_key=True)
-    objects = models.Manager()
+    user = models.OneToOneField(User, on_delete=models.CASCADE, primary_key=True)
 
 
 class Beneficiary(models.Model):
-    user = models.OneToOneField(User, on_delete=models.SET_DEFAULT, primary_key=True)
-    bank_card_number = models.CharField(max_length=16)
-    objects = models.Manager()
+    user = models.OneToOneField(User, on_delete=models.CASCADE, primary_key=True)
+    bank_card_number = models.CharField(max_length=16, unique=True)
 
 
-class Help(models.Model):
-    date_of_help = models.DateField()
-    kind_of_help = models.CharField(max_length=255)
+class HelpRequest(models.Model):
+    FINANCIAL = "Financial"
+    MATERIAL = "Material"
+    SUPPORT_TYPES = [
+        (FINANCIAL, "Фінансова допомога"),
+        (MATERIAL, "Матеріальна допомога"),
+    ]
+    ACTUAL = "ACTUAL"
+    PROVIDED = "PROVIDED"
+    STATUSES = [
+        (ACTUAL, "Актуальна"),
+        (PROVIDED, "Завершена"),
+    ]
+
+    support_type = models.CharField(
+        max_length=64,
+        choices=SUPPORT_TYPES,
+        default=FINANCIAL
+    )
+    status = models.CharField(
+        max_length=64,
+        choices=STATUSES,
+        default=ACTUAL
+    )
     status_of_help = models.CharField(max_length=255)
     contain_of_help = models.TextField()
-    donor = models.ForeignKey(Donor, on_delete=models.PROTECT)
     beneficiary = models.ForeignKey(Beneficiary, on_delete=models.PROTECT)
 
 
-class Supplier(models.Model):
-    company_name = models.CharField(max_length=255)
-    contact_person = models.CharField(max_length=255)
-    email = models.EmailField()
-    phone_num = models.CharField(max_length=15)
-    address_optional = models.CharField(max_length=255)
-    helps = models.ManyToManyField(Help, related_name='suppliers')
+class Help(models.Model):
+    EXPECTED = "EXPECTED"
+    CONFIRMED = "CONFIRMED"
+    PROVIDED = "PROVIDED"
+    STATUSES = [
+        (EXPECTED, "Очікується допомога"),
+        (PROVIDED, "Допомога надана"),
+        (CONFIRMED, "Допомога підтверджена"),
+    ]
 
+    status = models.CharField(
+        max_length=64,
+        choices=STATUSES,
+        default=EXPECTED
+    )
 
-class Sponsor(models.Model):
-    company_name = models.CharField(max_length=255)
-    contact_person = models.CharField(max_length=255)
-    email = models.EmailField()
-    phone_num = models.CharField(max_length=15)
-    address_optional = models.CharField(max_length=255)
-    type_of_help = models.CharField(max_length=255)
-    helps = models.ManyToManyField(Help, related_name='sponsors')
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+    donor = models.ForeignKey(Donor, on_delete=models.PROTECT)
+    help_request = models.ForeignKey(HelpRequest, on_delete=models.PROTECT)
+

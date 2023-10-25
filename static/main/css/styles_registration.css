@@ -1,9 +1,8 @@
 
 .form-container {
   width: 450px;
-  height: 410px;
+  height: 460px;
   margin: 0 auto;
-
   background: linear-gradient(to bottom right, #6A5ACD, #40E0D0);
   color: #fff;
   padding-top: 30px;
@@ -26,7 +25,10 @@
      border: none;
      outline: none;
      border: 1px solid rgba(255,255,255,.2);
-     margin: 10px;
+     margin-bottom: 10px;
+     margin-left: 10px;
+     margin-right: 10px;
+     margin-top: 2px;
      border-radius: 40px;
      font-size: 15px;
      color:#fff;
@@ -34,9 +36,7 @@
      font-weight: 100;
 }
 
-.input-box input::placeholder{
-    color: #ADD8E6;
-}
+
 
 .input-box i{
     position: absolute;
@@ -79,4 +79,12 @@
     margin-right: 24px;
     text-align: center;
     float: right;
+}
+.lable-box
+{
+    font-weight: 100;
+    position: relative;
+    left: 22px;
+    color: #fff;
+
 }

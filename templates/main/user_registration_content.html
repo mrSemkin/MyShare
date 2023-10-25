@@ -2,17 +2,30 @@
 <link rel="stylesheet" type="text/css" href="{% static 'main/css/styles_registration.css' %}">
 <form action="" method="post"  class="form-container" >
   <h1>Реєстрація</h1>
-    <div class="input-box">
-      <input tabindex="1" placeholder="Ім'я" type="text" name="username" id="name" required />
+    <div>
+      <label class="lable-box">Ім'я</label>
     </div>
     <div class="input-box">
-      <input tabindex="2"  placeholder="Email" type="email" name="email" id="email" required />
+      <input tabindex="1"
+             type="text" name="username" id="name" required />
+    </div>
+  <div>
+      <label class="lable-box">Email</label>
     </div>
     <div class="input-box">
-      <input tabindex="3" placeholder="Придумайте пароль" type="password" name="password" id="password" required />
+      <input tabindex="2" type="email" name="email" id="email" required />
+    </div>
+  <div>
+      <label class="lable-box">Придумайте пароль</label>
+    </div>
+    <div class="input-box">
+      <input tabindex="3" type="password" name="password" id="password" required />
     </div >
+  <div>
+      <label class="lable-box">Підтвердіть пароль</label>
+    </div>
     <div class="input-box">
-      <input tabindex="4" placeholder="Підтвердіть пароль" type="password" name="password2" id="password2" required />
+      <input tabindex="4" type="password" name="password2" id="password2" required />
     </div>
     <div>
       <button tabindex="5" type="submit" class="btn-registration">Зареєструватись</button>

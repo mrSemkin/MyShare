@@ -1,47 +1,102 @@
+{% load sass_tags %}
 {% load static %}
 <!DOCTYPE html>
 <html lang="uk-UK">
 <head>
+    {% load bootstrap5 %}
+    {% bootstrap_css %}
+    {% bootstrap_javascript %}
     <meta charset="UTF-8">
     <title>main page</title>
-    <link rel="stylesheet" type="text/css" href="{% static 'main/css/styles_links_as_buttons.css' %}">
+    {#    <link rel="stylesheet" type="text/css" href="{% static 'main/css/styles_links_as_buttons.css' %}">#}
+    {#    <link rel="stylesheet" type="text/css" href="{% static 'main/css/basePage.css' %}">#}
+    <link href="{% sass_src 'main/css/basePage.scss' %}" rel="stylesheet" type="text/css"/>
+    {#    <link rel="stylesheet" type="text/css" href="{% sass_src 'main/css/basePage.scss' %}">#}
 </head>
 <body>
-    {% block work_comments %}
-    {% endblock %}
+<div>
+    <header>
+        <div class="container-xxl">
+            <ul class="nav bg-info">
+                <li class="nav-item">
+                    <a href="#">
+                        <img src="{% static 'main/img/logo.png' %}" alt="">
+                    </a>
+                </li>
+                <li class="nav-item"><a class="btn btn-primary btn-lg"
+                                        href="{% url "about" %}">про нас</a></li>
+                <li class="nav-item"><a class="btn btn-primary btn-lg"
+                                        href="{% url "general_reports" %}">Загальні звіти про допомогу</a></li>
+                <li class="nav-item"><a class="btn btn-primary btn-lg"
+                                        href="{% url "feedback" %}">Подяки відгуки</a>
+                </li>
+                <li class="nav-item">{# userName #}
+                    <label class="userName" >
+                        <div>
+                            {% if user.is_authenticated %}
+                                {{ request.user.username }}
+                            {% else %}
+                                Гість
+                            {% endif %}
+                        </div>
+                    </label></li>
+                <li class="nav-item">
+                    <div>
+                        {% if user.is_authenticated %}
+                            <a class="btn btn-primary btn-lg" href={% url "login" %}>Вихід</a>
+                        {% else %}
+                            <a class="btn btn-primary btn-lg" href={% url "login" %}>Вхід</a>
+                        {% endif %}
+                </li>
+                <li class="nav-item">
+                    <div>
+                        {% if user.is_authenticated %}
+                            <a class="btn btn-primary btn-lg" href={% url "user_cabinet" %}>Особистий кабінет</a>
+                        {% else %}
+                            <a class="btn btn-primary btn-lg" href={% url "user_registration" %}>Реєстрація</a>
+                        {% endif %}
+                    </div>
+                </li>
+                <li class="nav-item">
+                    <div>
+                        <div>
+                            {% if user.is_authenticated %}
+                                <img src="{% static 'main/img/noAvatar60x60.png' %}" alt="Гість">
+                            {% else %}
+                                <img src="{% static 'main/img/unknownUser60x60.png' %}" alt="Смайлик">
 
-<header>
 
-    <div class="topMenu">
-        <ul class="title" title="name">
-            <li><a href="{% url "about" %}">про нас</a></li>
-            <li><a href="{% url "general_reports" %}">Загальні звіти про допомогу</a></li>
-            <li><a href="{% url "feedback" %}">Подяки відгуки</a></li>
-            <li><a href={% url "login" %}>вхід</a></li>
-            <li><a href={% url "user_registration" %}>реєстрація</a></li>
-        </ul>
-    </div>
-    <div>
-        <h2>
+                            {% endif %}
+                        </div>
+                        {#                    <img src="{% static 'main/img/noAvatar60x60.png' %}" alt="" >#}
+                    </div>
+                </li>
+            </ul>
+        </div>
+        <div>
             {% block sub_header %}
             {% endblock %}
-        </h2>
+        </div>
+    </header>
+    <div class="container-xxl">
+        {% block content %}
+        {% endblock %}
     </div>
-</header>
-<div class="content">
-    {% block content %}
-    {% endblock %}
+
+    <footer>
+        <div class="container-xxl">
+            <ul class="nav bg-info">
+                <li class="nav-item"><a class="btn btn-primary btn-lg" href={% url "index" %}>На головну</a></li>
+                <li class="nav-item"><a class="btn btn-primary btn-lg" href={% url "partners" %}>Наші партнери</a></li>
+                <li class="nav-item"><a class="btn btn-primary btn-lg" href={% url "new_partner" %}>Стати партнером</a>
+                </li>
+                <li class="nav-item"><a class="btn btn-primary btn-lg" href={% url "fund_project" %}>Підтримати
+                    проект</a></li>
+                <li class="nav-item"><a class="btn btn-primary btn-lg" href={% url "police" %}>Сповістити про
+                    шахрайство</a></li>
+            </ul>
+        </div>
+    </footer>
 </div>
-<footer>
-    <div>
-        <ul class="title" title="name">
-            <li><a href={% url "index" %}>На головну</a></li>
-            <li><a href={% url "partners"%}>Наші партнери</a></li>
-            <li><a href={% url "new_partner" %}>Стати партнером</a></li>
-            <li><a href={% url "fund_project" %}>Підтримати проект</a></li>
-            <li><a href={% url "police" %}>Сповістити про шахрайство</a></li>
-        </ul>
-    </div>
-</footer>
 </body>
 </html>

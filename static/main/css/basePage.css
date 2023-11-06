@@ -1,0 +1,67 @@
+@charset "UTF-8";
+.btn-lg .btn .btn-primary .btn-group-vertical .a #button {
+  color: black;
+  transition: color 0.3s; }
+  .btn-lg .btn .btn-primary .btn-group-vertical .a #button:hover {
+    color: #914be6; }
+
+:root {
+  --bs-info-rgb: 225, 225, 245;
+  /* Нове значення синього колору */ }
+
+.bg-info {
+  border: solid #dcbef5 1px;
+  border-radius: 0.3rem;
+  margin: 1px; }
+
+.userName {
+  color: #914be6; }
+
+.btn-primary {
+  color: #914be6;
+  background-color: #eed6ff;
+  border: solid #914be6 1px;
+  border-radius: 0.3rem; }
+
+.container-xxl ul {
+  align-items: center;
+  /*text-align: center; !* Центруємо текст по горизонталі внутрішнього <a> *!*/ }
+
+.nav-item a img {
+  /*display: block; !* Зробимо зображення блоком, щоб задати розмір і вирівнювання *!*/
+  margin: 0;
+  /* Центруємо по горизонталі */
+  /*max-width: 100%; !* Зображення буде змінювати розмір відповідно до контейнера *!*/
+  height: 60px; }
+
+.nav-item label.userName {
+  width: 150px;
+  text-align: center; }
+
+.container-xxl li {
+  margin-right: 5px; }
+
+.nav-item a.avatar img {
+  border-radius: 0.3rem;
+  border: solid #dcbef5 2px; }
+
+.bg-info, .bg-primary {
+  background-color: #0ed900; }
+
+.btn-primary:focus,
+.btn-primary:hover {
+  background-color: #914be6;
+  /* Новий колір фону кнопки при наведенні */
+  border-color: #914be6;
+  /* Новий колір рамки кнопки при наведенні */
+  color: white;
+  /* Новий колір тексту для кращої видимості */ }
+
+.btn-primary:disabled {
+  background-color: #d7d7d7;
+  /* Змініть фоновий колір вимкнутої кнопки */
+  color: white;
+  /* Змініть колір тексту на вимкнутої кнопці */
+  /* Додайте будь-які інші стилі, які ви хочете застосувати до вимкнених кнопок */ }
+
+/*# sourceMappingURL=basePage.css.map */

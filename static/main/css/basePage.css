@@ -1,0 +1,58 @@
+@charset "UTF-8";
+:root {
+  --bs-info-rgb: 225, 225, 245;
+  /* Нове значення синього колору */ }
+
+.nav li.active, .nav li.active:hover, a:hover, a:focus, a:focus-visible {
+  background-color: #914be6 !important;
+  border-radius: 0.3rem;
+  border: solid #dcbef5 1px; }
+
+.bg-info {
+  border: solid #dcbef5 1px;
+  border-radius: 0.3rem;
+  margin: 1px; }
+
+.userName {
+  color: #914be6; }
+
+.btn-primary {
+  color: #914be6;
+  background-color: #eed6ff;
+  border: solid #914be6 1px;
+  border-radius: 0.3rem; }
+
+.container-xxl ul {
+  align-items: center;
+  /*text-align: center; !* Центруємо текст по горизонталі внутрішнього <a> *!*/ }
+
+.nav-item a img {
+  /*display: block; !* Зробимо зображення блоком, щоб задати розмір і вирівнювання *!*/
+  margin: 0;
+  /* Центруємо по горизонталі */
+  /*max-width: 100%; !* Зображення буде змінювати розмір відповідно до контейнера *!*/
+  height: 60px; }
+
+.nav-item label.userName {
+  width: 150px;
+  text-align: center; }
+
+.container-xxl li {
+  margin-right: 5px; }
+
+.nav-item a.avatar img {
+  border-radius: 0.3rem;
+  border: solid #dcbef5 2px; }
+
+.bg-info {
+  background-color: #ff0059; }
+
+footer {
+  justify-content: center;
+  align-items: center;
+  position: fixed;
+  bottom: 0;
+  /* Знизу вікна браузера */
+  width: 100%; }
+
+/*# sourceMappingURL=basePage.css.map */

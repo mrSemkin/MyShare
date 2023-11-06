@@ -1,0 +1,12 @@
+{% extends 'main/base._layout.html' %}
+
+{% block content %}
+    <div>
+        <h1>Оберіть, кому хочете допомогти:</h1>
+        <ul>
+            {% for beneficiary in beneficiaries %}
+                <li>{{ beneficiary.name }} - {{ beneficiary.description }}</li>
+            {% endfor %}
+        </ul>
+    </div>
+{% endblock %}

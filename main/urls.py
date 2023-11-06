@@ -16,6 +16,8 @@ urlpatterns = [
     path('new_partner/', views.new_partner, name='new_partner'),
     path('fund_project/', views.fund_project, name='fund_project'),
     path('police/', views.police, name='police'),
+    path('want_to_help/', views.want_to_help, name='want_to_help'),
+    path('beneficiary/<int:beneficiary_id>/', views.beneficiary_detail, name='beneficiary_detail'),
+    path('user_cabinet/', views.user_cabinet, name='user_cabinet'),
 
-]+static(settings.STATIC_URL,document_root=settings.STATIC_URL)
-
+] + static(settings.STATIC_URL, document_root=settings.STATIC_URL)

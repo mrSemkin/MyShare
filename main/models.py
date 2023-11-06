@@ -13,6 +13,7 @@ class Donor(models.Model):
 class Beneficiary(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE, primary_key=True)
     bank_card_number = models.CharField(max_length=16, unique=True)
+    objects = models.Manager()
 
 
 class HelpRequest(models.Model):
@@ -39,7 +40,7 @@ class HelpRequest(models.Model):
         choices=STATUSES,
         default=ACTUAL
     )
-    status_of_help = models.CharField(max_length=255)
+
     contain_of_help = models.TextField()
     beneficiary = models.ForeignKey(Beneficiary, on_delete=models.PROTECT)
 
@@ -64,4 +65,3 @@ class Help(models.Model):
     updated_at = models.DateTimeField(auto_now=True)
     donor = models.ForeignKey(Donor, on_delete=models.PROTECT)
     help_request = models.ForeignKey(HelpRequest, on_delete=models.PROTECT)
-

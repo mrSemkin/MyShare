@@ -1,0 +1,10 @@
+<div>
+    <h1>Список бенефіціарів</h1>
+    <ul>
+        {% for beneficiary in beneficiaries %}
+            <li>
+                <a href="{% url 'beneficiary_detail' beneficiary.id %}">{{ beneficiary.user.username }}</a>
+            </li>
+        {% endfor %}
+    </ul>
+</div>

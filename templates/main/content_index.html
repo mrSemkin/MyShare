@@ -1,3 +1,9 @@
-    <button type="button">хочу допомогти</button><br>
+    <button type="button" onclick="wantToHelp()">хочу допомогти</button>
+    <script>
+function wantToHelp() {
+     window.location.href = "{% url 'want_to_help' %}";
+}
+</script>
+
     <button type="button">подати запит на допомогу</button><br>
-    <button type="button">Мониторинг волантеру</button><br>
+    <button type="button">Мониторинг волонтеру</button><br>

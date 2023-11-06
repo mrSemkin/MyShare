@@ -2,6 +2,16 @@ $--bs-info-rgb: #d9af0d !important;
 $danger: #ff4136;
 $primary: #0ed900;
 $bs-info: #0ed900;
+$btn-link-hover-color: rgb(145, 75, 230);
+.btn-lg .btn .btn-primary .btn-group-vertical .a #button {
+  color: black;
+  transition: color 0.3s; // Анімація для плавного зміни кольору
+
+  &:hover {
+    color: $btn-link-hover-color; // Застосування змінної при наведенні
+  }
+}
+
 :root {
   --bs-info-rgb: 225, 225, 245; /* Нове значення синього колору */
 }
@@ -11,11 +21,12 @@ $theme-colors: (
   "danger": $danger,
   "--bs-info-rgb":rgb(14, 217, 0) !important
 );
-.nav li.active, .nav li.active:hover, a:hover, a:focus, a:focus-visible {
-  background-color: rgb(145, 75, 230) !important;
-  border-radius: 0.3rem ;
-  border: solid #dcbef5 1px;
-}
+//.nav li.active, .nav li.active:hover, a:hover, a:focus, a:focus-visible .button:hover {
+//  background-color: rgb(230, 75, 122) !important;
+//  //background-color: rgb(145, 75, 230) !important;
+//  border-radius: 0.3rem ;
+//  border: solid #dcbef5 1px;
+//}
 .bg-info {
   border: solid #dcbef5 1px ;
   border-radius: 0.3rem ;
@@ -25,7 +36,7 @@ $theme-colors: (
 .userName{
   color: #914be6;
 }
-.btn-primary{
+.btn-primary, {
   color: #914be6;
   background-color: #eed6ff;
   border: solid #914be6 1px;
@@ -53,13 +64,24 @@ $theme-colors: (
     border-radius: 0.3rem;
     border: solid #dcbef5 2px;
 }
-.bg-info {
-     background-color: #ff0059;
+.bg-info, .bg-primary {
+     background-color: #0ed900;
 }
 footer{
-  justify-content: center;
-  align-items: center;
-  position: fixed;
-  bottom: 0; /* Знизу вікна браузера */
-  width: 100%;
+  //justify-content: center;
+  //align-items: center;
+  //position: fixed;
+  //bottom: 0; /* Знизу вікна браузера */
+  //width: 100%;
+}
+.btn-primary:focus,
+.btn-primary:hover {
+  background-color: rgb(145, 75, 230); /* Новий колір фону кнопки при наведенні */
+  border-color: rgb(145, 75, 230); /* Новий колір рамки кнопки при наведенні */
+  color: white; /* Новий колір тексту для кращої видимості */
+}
+.btn-primary:disabled {
+    background-color: #d7d7d7; /* Змініть фоновий колір вимкнутої кнопки */
+    color: white; /* Змініть колір тексту на вимкнутої кнопці */
+    /* Додайте будь-які інші стилі, які ви хочете застосувати до вимкнених кнопок */
 }

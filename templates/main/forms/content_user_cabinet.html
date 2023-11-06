@@ -1,0 +1,118 @@
+<style>
+    label {
+        margin-right: 10px
+    }
+
+    .mb-2 {
+        display: flex;
+        justify-content: space-between;
+
+    }
+
+    input[type="text"], input[type="password"], input[type='email'] {
+        width: 200px;
+    }
+
+    label[for="password1"],
+    label[for="password2"] {
+        display: inline;
+    }
+</style>
+<div style="display: flex; justify-content: center; align-items: center; width: 100%; height: 80vh;">
+    {#            {{ form.as_p }}#}
+    <form method="post" action="{% url 'user_cabinet' %}">
+        {% csrf_token %}
+        <div class="border rounded p-5" style="max-width: 450px; color: #914be6;">
+            <h2 class="mb-2">Особистий кабінет</h2>
+            {#            {% username %}#}
+            {#            ПІБ пароль(+кнопка сменить) Список допомог Приватні сообщенія Нагадування Почта Фото #}
+            <div class="mb-2">
+                <label for="username">Логін</label>
+                <input class="form-control" type="text" name="username" id="username" value="{{ username }}"/>
+            </div>
+
+            <div class="mb-2">
+                <label for="first_name">Ім'я</label><input class="form-control" type="text" name="first_name"
+                                                           id="first_name" value="{{ first_name }}"/>
+            </div>
+
+            <div class="mb-2">
+                <label for="last_name">Призвіще</label><input class="form-control" type="text" name="last_name"
+                                                              id="last_name" value="{{ last_name }}"/>
+            </div>
+
+            <div class="mb-2">
+                <label for="email">Скринька</label><input class="form-control" type="email" name="email" id="email"
+                                                          value="{{ email }}"/>
+            </div>
+            {#            <input class="form-control" type="text" name="las_name" id="las_name" value="{{ user.last_rname }}" required/>#}
+            {#            <div class="mb-3">#}
+            {#                <input class="form-control" type="password" name="password" id="password" required/>#}
+            {#            </div>#}
+
+            <div class="mb-2">
+                <button class="btn btn-secondary btn-sm  form-control" type="button" onclick="togglePasswordFields()">
+                    Змінити пароль
+                </button>
+            </div>
+
+            <div class="mb-2">
+                <label for="password1" style="display: none;">Пароль</label>
+                <input class="form-control" type="password"
+                       style="visibility: hidden" name="password1" id="password1"/>
+            </div>
+
+            <div class="mb-2">
+                <label for="password2" style="display: none;">перевірка</label>
+                <input class="form-control" type="password"
+                       style="visibility: hidden" name="password2"
+                       id="password2"/>
+            </div>
+                <span id="passwordOk"></span>
+
+
+            <div class="mb-2" style="display: flex; justify-content: space-between;">
+                <button class="form-control btn-primary" name="cancel" id="btn_Cancel" type="submit">Відміна</button>
+                <button class="form-control btn-primary" name="submit" id="btn_Ok" type="submit">Зберегти</button>
+            </div>
+        </div>
+    </form>
+</div>
+<script>
+
+    function togglePasswordFields() {
+        let passwordFields = document.querySelectorAll('input[type="password"]');
+        passwordFields.forEach(field => {
+            field.style.visibility = (field.style.visibility === 'hidden') ? 'visible' : 'hidden';
+            if (field.id === 'password1' || field.id === 'password2') {
+                let labelForField = document.querySelector('label[for="' + field.id + '"]');
+                if (labelForField) {
+                    if (field.style.display === 'hidden') {
+                    labelForField.style.display = 'block';}
+                    else{
+                    labelForField.style.display = 'inline';
+                }}
+            }
+        });
+    }
+
+    document.getElementById('password1').addEventListener('input', checkPasswords);
+    document.getElementById('password2').addEventListener('input', checkPasswords);
+
+    function checkPasswords() {
+        var password1 = document.getElementById('password1').value;
+        var password2 = document.getElementById('password2').value;
+        var passwordOk = document.getElementById('passwordOk');
+        var submitButton = document.getElementById('btn_Ok');
+
+        if (password1 !== password2) {
+            passwordOk.innerHTML = 'Паролі не збігаються';
+            // Якщо паролі не співпадають, можна приховати кнопку "Зареєструватись" або відключити її
+            submitButton.disabled = true;
+        } else {
+            passwordOk.innerHTML = 'Паролі співпадають';
+            // Якщо паролі співпадають, можна дозволити кнопку "Зареєструватись"
+            submitButton.disabled = false;
+        }
+    }
+</script>

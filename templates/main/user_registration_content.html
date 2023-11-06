@@ -1,36 +1,63 @@
-{% load static %}
-<link rel="stylesheet" type="text/css" href="{% static 'main/css/styles_registration.css' %}">
-<form action="" method="post"  class="form-container" >
-  <h1>Реєстрація</h1>
-    <div>
-      <label class="lable-box">Ім'я</label>
-    </div>
-    <div class="input-box">
-      <input tabindex="1"
-             type="text" name="username" id="name" required />
-    </div>
-  <div>
-      <label class="lable-box">Email</label>
-    </div>
-    <div class="input-box">
-      <input tabindex="2" type="email" name="email" id="email" required />
-    </div>
-  <div>
-      <label class="lable-box">Придумайте пароль</label>
-    </div>
-    <div class="input-box">
-      <input tabindex="3" type="password" name="password" id="password" required />
-    </div >
-  <div>
-      <label class="lable-box">Підтвердіть пароль</label>
-    </div>
-    <div class="input-box">
-      <input tabindex="4" type="password" name="password2" id="password2" required />
-    </div>
-    <div>
-      <button tabindex="5" type="submit" class="btn-registration">Зареєструватись</button>
-    </div>
-    <div class="btn">
-      <button tabindex="6" type="cancel" class="btn-cancel">Відмінити</button>
-    </div>
-</form>
+<div style="display: flex; justify-content: center; align-items: center; width: 100%; height: 80vh;">
+    <form action="{% url 'add_user' %}" method="post" class="container d-flex justify-content-center align-items-center vh-100">
+        <div class="border rounded p-4" style="max-width: 400px; color: #914be6;">
+            {% csrf_token %}
+            <h2 class="mb-4">Реєстрація</h2>
+            <div class="mb-3">
+                <label for="name" class="form-label">Логін</label>
+                <input tabindex="1" type="text" class="form-control" name="username" id="name" />
+            </div>
+            <div class="mb-3">
+                <label for="email" class="form-label">Email</label>
+                <input tabindex="2" type="email" class="form-control" name="email" id="email" />
+            </div>
+            <div class="mb-3">
+                <label for="password" class="form-label">Придумайте пароль</label>
+                <input tabindex="3" type="password" class="form-control" name="password" id="password" />
+            </div>
+            <div class="mb-3">
+                <label for="password2" class="form-label">Підтвердіть пароль</label>
+                <input tabindex="4" type="password" class="form-control" name="password2" id="password2" />
+                <span id="passwordOk"></span>
+            </div>
+            <button tabindex="6" type="cancel" class="btn btn-secondary">Відмінити</button>
+            <button tabindex="5" type="submit" id="btn_Ok" class="btn btn-primary">Зареєструватись</button>
+        </div>
+    </form>
+</div>
+<script>
+
+    document.getElementById('password').addEventListener('input', checkPasswords);
+    document.getElementById('password2').addEventListener('input', checkPasswords);
+    function checkPasswords() {
+        var password = document.getElementById('password').value;
+        var password2 = document.getElementById('password2').value;
+        var passwordOk = document.getElementById('passwordOk');
+        var submitButton = document.getElementById('btn_Ok');
+        if (password !== password2) {
+            passwordOk.innerHTML = 'Паролі не збігаються';
+            // Якщо паролі не співпадають, можна приховати кнопку "Зареєструватись" або відключити її
+            submitButton.disabled = true;
+        } else {
+            passwordOk.innerHTML = 'Паролі співпадають';
+            // Якщо паролі співпадають, можна дозволити кнопку "Зареєструватись"
+            submitButton.disabled = false;
+        }
+    }
+    {#document.getElementById('password2').addEventListener('input', function () {#}
+    {#    var password1 = document.getElementById('password').value;#}
+    {#    var password2 = document.getElementById('password2').value;#}
+    {#    var passwordOk = document.getElementById('passwordOk');#}
+    {##}
+    {#    if (password1 !== password2) {#}
+    {#        passwordOk.innerHTML = 'Паролі не збігаються';#}
+    {#        // Якщо паролі не співпадають, можна приховати кнопку "Зареєструватись" або відключити її#}
+    {#        document.querySelector('.btn.btn-primary').disabled = true;#}
+    {#    } else {#}
+    {#        passwordOk.innerHTML = 'Паролі співпадають';#}
+    {#        // Якщо паролі співпадають, можна дозволити кнопку "Зареєструватись"#}
+    {#        document.querySelector('.btn.btn-primary').disabled = false;#}
+    {#    }#}
+    {#});#}
+</script>
+

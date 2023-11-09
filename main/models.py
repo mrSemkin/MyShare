@@ -15,6 +15,11 @@ class Beneficiary(models.Model):
     bank_card_number = models.CharField(max_length=16, unique=True)
 
 
+class HelpRequestManager(models.Manager):
+    def get_actual_help_requests(self):
+        return self.filter(status=HelpRequest.ACTUAL)
+
+
 class HelpRequest(models.Model):
     FINANCIAL = "Financial"
     MATERIAL = "Material"
@@ -43,6 +48,8 @@ class HelpRequest(models.Model):
     contain_of_help = models.TextField()
     beneficiary = models.ForeignKey(Beneficiary, on_delete=models.PROTECT)
 
+    objects = HelpRequestManager()
+
 
 class Help(models.Model):
     EXPECTED = "EXPECTED"
@@ -64,4 +71,3 @@ class Help(models.Model):
     updated_at = models.DateTimeField(auto_now=True)
     donor = models.ForeignKey(Donor, on_delete=models.PROTECT)
     help_request = models.ForeignKey(HelpRequest, on_delete=models.PROTECT)
-

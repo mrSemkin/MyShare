@@ -1,0 +1,59 @@
+{% extends 'main/base._layout.html' %}
+
+{% block content %}
+<!DOCTYPE html>
+<html lang="uk-UK">
+<head>
+    <style>
+        .bg-custom {
+            background-color: #e3b8f1 !important;
+        }
+
+        .custom-card {
+            margin-bottom: 20px;
+        }
+
+        .list-group-item {
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container mt-5">
+        <div class="card bg-custom text-white mb-4">
+            <div class="card-body">
+                <h1 class="mb-4" style="color: #864df8;font-size: 32px;">Список запитів на допомогу:</h1>
+
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="list-group">
+                            {% for help_request in help_requests|slice:":"|slice:"::2" %}
+                                <a href="#" class="list-group-item list-group-item-action custom-card">
+                                    <h5 class="mb-1">{{ help_request.beneficiary.user.username }}</h5>
+                                    <p class="mb-1">Тип допомоги: {{help_request.get_support_type_display }}</p>
+                                    <p class="mb-1">Статус: {{ help_request.get_status_display }}</p>
+                                    <p>Опис запиту: {{ help_request.contain_of_help }}</p>
+                                </a>
+                            {% endfor %}
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="list-group">
+                            {% for help_request in help_requests|slice:":"|slice:"1::2" %}
+                                <a href="#" class="list-group-item list-group-item-action custom-card">
+                                    <h5 class="mb-1">{{ help_request.beneficiary.user.username }}</h5>
+                                    <p class="mb-1">Тип допомоги: {{help_request.get_support_type_display }}</p>
+                                    <p class="mb-1">Статус: {{ help_request.get_status_display }}</p>
+                                    <p>Опис запиту: {{ help_request.contain_of_help }}</p>
+
+                                </a>
+                            {% endfor %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
+{% endblock %}

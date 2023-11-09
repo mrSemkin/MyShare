@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="uk-UK">
+<head>
+</head>
+<body>
+    <div class="container mt-5">
+        <div class="card bg-custom text-white mb-4">
+            <div class="card-body">
+                <h1 class="mb-4" style="color: #864df8;font-size: 32px;">Інформація про банківську картку бенефіціара:</h1>
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="card text-white mb-4">
+                            <div class="card-body">
+                                <h2>{{ beneficiary.user.username }}</h2>
+                                <p class="mb-2">Тип допомоги: {{ beneficiary.get_support_type_display }}</p>
+                                <p class="mb-2">Статус: {{ beneficiary.get_status_display }}</p>
+                                <p>Опис запиту: {{ beneficiary.contain_of_help }}</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="card text-white mb-4">
+                            <div class="card-body">
+                                <h2>Банківські дані:</h2>
+                                <p class="mb-2">Номер картки: {{ beneficiary.bank_card_number }}</p>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

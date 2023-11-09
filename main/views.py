@@ -1,4 +1,5 @@
-from django.shortcuts import render, redirect
+from django.views.generic.base import View
+from django.shortcuts import render, redirect, get_object_or_404
 from django.http import HttpResponse
 from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth import authenticate, login
@@ -8,11 +9,15 @@ from .forms import UserLoginForm
 from .forms import UserRegistrationForm
 from django.contrib.auth import logout
 from django.contrib.auth.models import User
-# Create your views here.
+from .models import HelpRequest
+
+
+
 def index(request):
     msg = {'url': 'main/index.html',
            'msg': 'WELCOME'}
     return render(request, msg['url'],  msg)
+
 
 def about(request):
     msg = {'url': 'main/about.html',
@@ -21,19 +26,24 @@ def about(request):
 
     return render(request, msg['url'], msg)
 
+
 def general_reports(request):
     msg = {'url': 'main/general_reports.html',
            'msg': ''}
     return render(request, msg['url'], msg)
+
+
 def feedback(request):
     msg = {'url': 'main/feedback.html',
            'msg': ''}
     return render(request, msg['url'], msg)
 
+
 def login(request):
     msg = {'url': 'main/login.html',
            'msg': ''}
     return render(request, msg['url'], msg)
+
 
 def user_registration(request):
     msg = {'url': 'main/user_registration.html',
@@ -41,27 +51,33 @@ def user_registration(request):
            'msg': ''}
     return render(request, msg['url'], msg)
 
+
 def partners(request):
     msg = {'url': 'main/partners.html',
            'msg': ''}
     return render(request, msg['url'], msg)
+
 
 def new_partner(request):
     msg = {'url': 'main/new_partner.html',
            'msg': ''}
     return render(request, msg['url'], msg)
 
+
 def fund_project(request):
     msg = {'url': 'main/fund_project.html',
            'msg': ''}
     return render(request, msg['url'], msg)
+
 
 def police(request):
     msg = {'url': 'main/police.html',
            'msg': 'po po po '}
     return render(request, msg['url'], msg)
 
+
 from django.contrib.auth import update_session_auth_hash
+
 
 def user_cabinet(request):
     if request.method == 'POST':
@@ -134,12 +150,15 @@ def custom_login(request):
 
 
 from django.contrib.auth import get_user
+
+
 def logout(request):
 
     request.session.flush()
     if request.user.is_authenticated:
         logout(request)
     return redirect('index')
+
 
 def login_as_guest(request):
     if request.user.is_authenticated:
@@ -155,6 +174,7 @@ def login_as_guest(request):
 
     return redirect('about')  # Замість 'home' вкажіть вашу домашню сторінку
 
+
 def add_user(request):
     if request.method == 'POST':
         uname = request.POST.get('username')  # Отримуємо значення з поля username форми
@@ -169,3 +189,8 @@ def add_user(request):
             user.save()
 
     return render(request, 'main/login.html', {})  # Змініть 'шаблон_після_реєстрації.html' на свій шаблон
+
+
+def help_request_list(request):
+    help_requests = HelpRequest.objects.filter(status=HelpRequest.ACTUAL)
+    return render(request, 'main/help_request_list.html', {'help_requests': help_requests})

@@ -10,7 +10,7 @@ from .forms import UserRegistrationForm
 from django.contrib.auth import logout
 from django.contrib.auth.models import User
 from .models import HelpRequest
-
+from .models import Beneficiary
 
 
 def index(request):
@@ -194,3 +194,8 @@ def add_user(request):
 def help_request_list(request):
     help_requests = HelpRequest.objects.filter(status=HelpRequest.ACTUAL)
     return render(request, 'main/help_request_list.html', {'help_requests': help_requests})
+
+
+def beneficiary_card(request, user_id):
+    beneficiary = Beneficiary.objects.get(id=user_id)
+    return render(request, 'main/beneficiary_card.html', {'beneficiary': beneficiary})

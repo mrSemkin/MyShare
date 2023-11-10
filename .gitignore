@@ -1,6 +1,6 @@
 .idea
 cmake-build-debug
-
+db.sqlite3
 # Default ignored files
 /shelf/
 /workspace.xml

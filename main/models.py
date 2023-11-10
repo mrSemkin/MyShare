@@ -45,7 +45,7 @@ class HelpRequest(models.Model):
         default=ACTUAL
     )
     status_of_help = models.CharField(max_length=255)
-    contain_of_help = models.TextField()
+    contain_of_help = models.TextField(max_length=255)
     beneficiary = models.ForeignKey(Beneficiary, on_delete=models.PROTECT)
 
     objects = HelpRequestManager()

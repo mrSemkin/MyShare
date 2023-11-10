@@ -1,0 +1,12 @@
+{% extends 'main/base_layout.html' %}
+
+{% block content %}
+    <div class="list-group">
+        {% for help_request in help_requests|slice:":"|slice:"::2" %}
+            <a href="{% url 'beneficiary_card' beneficiary_id=help_request.beneficiary.id %}" class="list-group-item list-group-item-action custom-card">
+                <h1>Номер банківської карти юзера {{ help_request.beneficiary.user.username }}: </h1>
+
+            </a>
+        {% endfor %}
+    </div>
+{% endblock %}

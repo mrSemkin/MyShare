@@ -6,6 +6,7 @@ class UserLoginForm(forms.Form):
     username = forms.CharField(widget=forms.EmailInput)
     password = forms.CharField(widget=forms.PasswordInput)
 
+
 class UserRegistrationForm(forms.Form):
     userlogin = forms.CharField(widget=forms.Field)
 
@@ -16,4 +17,6 @@ class UserRegistrationForm(forms.Form):
     password = forms.CharField(widget=forms.PasswordInput)
     password1 = forms.CharField(widget=forms.PasswordInput)
     password2 = forms.CharField(widget=forms.PasswordInput)
+
+
 

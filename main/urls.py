@@ -7,6 +7,9 @@ from django.urls import path
 from django.views.generic import RedirectView
 from django.conf import settings
 
+
+
+
 urlpatterns = [
 
                   path('', views.index, name='home'),
@@ -27,5 +30,8 @@ urlpatterns = [
                   path('logout/', views.logout, name='logout'),
 
                   path('login/guest/', views.login_as_guest, name='login_as_guest'),  # URL для увходу як гість
+                  path('help_request_list/', views.help_request_list, name='help_request_list'),
+
+                  path('beneficiary_card/<int:beneficiary_id>/', views.beneficiary_card, name='beneficiary_card'),
 
               ] + static(settings.STATIC_URL, document_root=settings.STATIC_URL)

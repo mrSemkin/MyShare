@@ -13,7 +13,7 @@
     <link href="{% sass_src 'main/css/basePage.scss' %}" rel="stylesheet" type="text/css"/>
     {#    <link rel="stylesheet" type="text/css" href="{% sass_src 'main/css/basePage.scss' %}">#}
 </head>
-<body>
+<body style="background-color: #fce7fc;">
 <div>
     <header>
         <div class="container-xxl sticky-top">
@@ -24,11 +24,11 @@
                     </a>
                 </li>
                 <li class="nav-item"><a class="btn btn-primary btn-lg"
-                                        href="{% url "about" %}">про нас</a></li>
+                                        href="{% url "about" %}">Про нас</a></li>
                 <li class="nav-item"><a class="btn btn-primary btn-lg"
                                         href="{% url "general_reports" %}">Загальні звіти про допомогу</a></li>
                 <li class="nav-item"><a class="btn btn-primary btn-lg"
-                                        href="{% url "feedback" %}">Подяки відгуки</a>
+                                        href="{% url "feedback" %}">Подяки/відгуки</a>
                 </li>
                 <li class="nav-item">{# userName #}
                     <label class="userName" >

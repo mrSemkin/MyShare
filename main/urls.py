@@ -31,7 +31,8 @@ urlpatterns = [
 
                   path('login/guest/', views.login_as_guest, name='login_as_guest'),  # URL для увходу як гість
                   path('help_request_list/', views.help_request_list, name='help_request_list'),
-
-                  path('beneficiary_card/<int:beneficiary_id>/', views.beneficiary_card, name='beneficiary_card'),
+                  path('help_request_list/<int:pk>/', views.MyCustomView.as_view(), name='HelpRequest_inf'),
+                  path('help_request_list/<int:pk>/donate_financial/', views.FinancialDonateView.as_view(),name='Financial_Donate'),
+                  path('help_request_list/<int:pk>/donate_material/', views.MaterialDonateView.as_view(),name='Material_Donate'),
 
               ] + static(settings.STATIC_URL, document_root=settings.STATIC_URL)

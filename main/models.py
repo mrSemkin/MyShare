@@ -20,6 +20,11 @@ class HelpRequestManager(models.Manager):
         return self.filter(status=HelpRequest.ACTUAL)
 
 
+class HelpRequestManager(models.Manager):
+    def get_actual_help_requests(self):
+        return self.filter(status=HelpRequest.ACTUAL)
+
+
 class HelpRequest(models.Model):
     FINANCIAL = "Financial"
     MATERIAL = "Material"

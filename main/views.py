@@ -9,21 +9,23 @@ from .forms import UserLoginForm
 from .forms import UserRegistrationForm
 from django.contrib.auth import logout
 from django.contrib.auth.models import User
-from .models import Beneficiary, HelpRequest
-from .forms import HelpRequestForm
 from django.urls import reverse
+from .models import HelpRequest, Beneficiary, User
+from django.views.generic import DetailView, TemplateView
+
 
 
 def index(request):
     msg = {'url': 'main/index.html',
            'msg': 'WELCOME'}
-    return render(request, msg['url'],  msg)
+    return render(request, msg['url'], msg)
+
 
 
 def about(request):
     msg = {'url': 'main/about.html',
            'msg': 'xx',
-           'new_user':'DDDDDDD'}
+           'new_user': 'DDDDDDD'}
 
     return render(request, msg['url'], msg)
 
@@ -116,9 +118,6 @@ def user_cabinet(request):
         return render(request, 'main/user_cabinet.html', msg)
     # return render(request, 'main/user_cabinet.html', {'form': form})
 
-from django.contrib.auth.forms import AuthenticationForm
-from django.contrib.auth import authenticate, login
-
 
 def custom_login(request):
     if request.method == 'POST':
@@ -135,6 +134,8 @@ def custom_login(request):
     else:
         form = AuthenticationForm(request.POST)
         return render(request, 'main/login.html', {'form': form})
+
+
 # Реєстрація шляху у файлі маршрутизації:
 
 # def login_form(request):
@@ -152,9 +153,7 @@ def custom_login(request):
 
 from django.contrib.auth import get_user
 
-
 def logout(request):
-
     request.session.flush()
     if request.user.is_authenticated:
         logout(request)
@@ -235,4 +234,24 @@ def bcard_page(request):
         return redirect(reverse('success_page'))
     return render(request, 'main/bcard_page.html')
 
+def help_request_list(request):
+    help_requests = HelpRequest.objects.filter(status=HelpRequest.ACTUAL, beneficiary__isnull=False)
+    return render(request, 'main/help_request_list.html', {'help_requests': help_requests})
 
+
+class MyCustomView(DetailView):
+    model = HelpRequest
+    template_name = 'main/help_request_inf.html'
+    context_object_name = 'help_request'
+
+
+class FinancialDonateView(DetailView):
+    model = HelpRequest
+    template_name = 'main/financial_donate.html'
+    context_object_name = 'financial'
+
+
+class MaterialDonateView(DetailView):
+    model = HelpRequest
+    template_name = 'main/material_donate.html'
+    context_object_name = 'material'

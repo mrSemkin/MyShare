@@ -1,6 +1,5 @@
 from django import forms
-from django.forms import TextInput, Textarea, ModelForm
-
+from django.forms import ModelForm
 from .models import HelpRequest
 
 
@@ -26,4 +25,3 @@ class HelpRequestForm(ModelForm):
     class Meta:
         model = HelpRequest
         fields = ['support_type', 'contain_of_help', 'beneficiary']
-

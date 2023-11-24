@@ -1,0 +1,59 @@
+{% extends 'main/base._layout.html' %}
+
+{% block content %}
+<div class="container mt-3">
+    <style>
+        .Donate-btn{
+            position: fixed;
+            bottom: 0;
+            right: 100px;
+            margin : 100px;
+            padding: 10px;
+            margin-left: 100px;
+        }
+        .Back-btn{
+            width:200px;
+        }
+        .help-request-list{
+            color: #764ace
+        }
+        .help-request-list h1{
+            font-size: 38px;
+        }
+        .help-request-list p{
+            font-size: 30px;
+        }
+        .help-request-list a{
+            position: fixed;
+            bottom: 20px;
+            right: 150px;
+            margin : 100px;
+            padding: 10px;
+            margin-left: 100px;
+        }
+
+        .bg-help{
+            background-color: #eac9f5 !important;
+            border-radius: 10px;
+            height: 400px;
+            width: 1000px;
+            margin-top: 20px;
+        }
+    </style>
+    <div class="Back-btn">
+        <a href="{% url 'help_request_list'%}"  class="btn btn-primary btn-lg"><i class="fas fa-list"></i> Back to list</a>
+    </div>
+    <div class="bg-help">
+        <div class="help-request-list">
+            <h1> {{help_request.beneficiary.user.last_name}} {{help_request.beneficiary.user.first_name}}</h1><br>
+            <p> Need: {{help_request.support_type}} help</p><br>
+            <p> Text of request: {{help_request.contain_of_help}}</p><br>
+            {% if help_request.support_type == "Financial" %}
+            <a href="{% url 'Financial_Donate' pk=help_request.id %}" class="btn btn-primary btn-lg"><i class="fas fa-money-bill"></i> Donate</a><br>
+            {% else %}
+            <a href="{% url 'Material_Donate' pk=help_request.id %}" class="btn btn-primary btn-lg"><i class="fas fa-box"></i> Donate</a><br>
+            {% endif %}
+        </div>
+    </div>
+</div>
+{% endblock %}

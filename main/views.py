@@ -200,3 +200,14 @@ class MyCustomView(DetailView):
     context_object_name = 'help_request'
 
 
+class FinancialDonateView(DetailView):
+    model = HelpRequest
+    template_name = 'main/financial_donate.html'
+    context_object_name = 'financial'
+
+
+class MaterialDonateView(DetailView):
+    model = HelpRequest
+    template_name = 'main/material_donate.html'
+    context_object_name = 'material'
+

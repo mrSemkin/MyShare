@@ -1,4 +1,7 @@
 from django import forms
+from django.forms import TextInput, Textarea, ModelForm
+
+from .models import HelpRequest
 
 
 class UserLoginForm(forms.Form):
@@ -19,4 +22,8 @@ class UserRegistrationForm(forms.Form):
     password2 = forms.CharField(widget=forms.PasswordInput)
 
 
+class HelpRequestForm(ModelForm):
+    class Meta:
+        model = HelpRequest
+        fields = ['support_type', 'contain_of_help', 'beneficiary']
 

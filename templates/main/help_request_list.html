@@ -101,6 +101,7 @@
                         <div class="list-group">
 
                             {% for help_request in help_requests %}
+
                                 <a href="{% url 'HelpRequest_inf' help_request.id %}" class="list-group-item list-group-item-action custom-card">
                                     <h5 class="mb-1" style="color: #4f049f; font-size: 19px;">{{ help_request.beneficiary.user.last_name }} {{help_request.beneficiary.user.first_name}}</h5>
                                     <p class="mb-1" style="color: #4f049f; font-size: 17px;">Тип допомоги: {{help_request.get_support_type_display }}</p>

@@ -42,4 +42,5 @@ urlpatterns = [
                   path('help_request_list/<int:pk>/donate_financial/', views.FinancialDonateView.as_view(),name='Financial_Donate'),
                   path('help_request_list/<int:pk>/donate_material/', views.MaterialDonateView.as_view(),name='Material_Donate'),
 
+
               ] + static(settings.STATIC_URL, document_root=settings.STATIC_URL)

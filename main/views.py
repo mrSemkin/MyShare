@@ -15,13 +15,11 @@ from .models import HelpRequest, Beneficiary, User
 from django.views.generic import DetailView, TemplateView
 
 
-
-
-
 def index(request):
     msg = {'url': 'main/index.html',
            'msg': 'WELCOME'}
     return render(request, msg['url'], msg)
+
 
 
 def about(request):
@@ -235,6 +233,7 @@ def bcard_page(request):
             return redirect(reverse('HelpRequest_inf', args=[help_request_id]))
         return redirect('index')
     return render(request, 'main/bcard_page.html')
+
 
 
 def help_request_list(request):

@@ -2,10 +2,11 @@ from django.views.generic.base import View
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from django.contrib.auth.forms import AuthenticationForm
-from django.contrib.auth import authenticate, login
+from django.contrib.auth import authenticate
+from django.contrib.auth import login as auth_login
 from django import forms
 from django.shortcuts import render
-from .forms import UserLoginForm
+from .forms import UserLoginForm, HelpRequestForm
 from .forms import UserRegistrationForm
 from django.contrib.auth import logout
 from django.contrib.auth.models import User
@@ -15,11 +16,12 @@ from django.views.generic import DetailView, TemplateView
 
 
 
+
+
 def index(request):
     msg = {'url': 'main/index.html',
            'msg': 'WELCOME'}
     return render(request, msg['url'], msg)
-
 
 
 def about(request):
@@ -101,7 +103,7 @@ def user_cabinet(request):
         user.save()
 
         update_session_auth_hash(request, user)  # Оновлення ключа сеансу
-        login(request, user)
+        auth_login(request, user)
         return render(request, 'main/index.html', {})  # Відобразити якусь сторінку після редагування профілю
 
     else:  # Якщо це GET-запит (відобразити форму з поточними даними)
@@ -113,7 +115,7 @@ def user_cabinet(request):
             'email': user.email,
         }
         update_session_auth_hash(request, user)  # Оновлення ключа сеансу
-        login(request, user)
+        auth_login(request, user)
         # return render(request, 'edit_profile.html', {'user': user})
         return render(request, 'main/user_cabinet.html', msg)
     # return render(request, 'main/user_cabinet.html', {'form': form})
@@ -128,7 +130,7 @@ def custom_login(request):
             user = authenticate(username=username, password=password)
             if user is not None:
                 if user.is_active:
-                    login(request, user)  # Ensure login is the one imported from django.contrib.auth
+                    auth_login(request, user)  # Ensure login is the one imported from django.contrib.auth
                     # After successful login, redirect as needed
                     return redirect('index')
     else:
@@ -170,7 +172,7 @@ def login_as_guest(request):
 
     # Аутентифікація новоствореного користувача
     user = authenticate(username='guest', password='guest_password')
-    login(request, user)
+    auth_login(request, user)
 
     return redirect('about')  # Замість 'home' вкажіть вашу домашню сторінку
 
@@ -211,28 +213,29 @@ def help_request_page(request):
             help_request = form.save(commit=True)
             help_request.beneficiary = request.user.beneficiary
             help_request.save()
-            success_url = reverse('bcard_page')
+            success_url = reverse('bcard_page')+f"?helprequest={help_request.id}"
             if beneficiary.bank_card_number:
-                success_url = reverse('success_page')
-            return redirect(success_url)
+                success_url = reverse('HelpRequest_inf', args=[help_request.id])
+                return redirect(success_url)
+            return render(request, 'main/bcard_page.html', {'help_request_id':help_request.id})
     else:
         form = HelpRequestForm()
     return render(request, 'main/help_request_page.html', {'form': form})
 
 
-def success_page(request):
-    return render(request, 'main/success_page.html')
-
-
 def bcard_page(request):
     if request.method == 'POST':
         card_number = request.POST.get('card_number', '')
+        help_request_id = request.POST.get('help_request_id', '')
         beneficiary = Beneficiary.objects.get(user=request.user)
         beneficiary.bank_card_number = card_number
         beneficiary.save()
-
-        return redirect(reverse('success_page'))
+        print(request.GET)
+        if help_request_id:
+            return redirect(reverse('HelpRequest_inf', args=[help_request_id]))
+        return redirect('index')
     return render(request, 'main/bcard_page.html')
+
 
 def help_request_list(request):
     help_requests = HelpRequest.objects.filter(status=HelpRequest.ACTUAL, beneficiary__isnull=False)

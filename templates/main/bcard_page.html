@@ -47,15 +47,16 @@
 </head>
 <body>
     <div class="card-form">
-        <form method="post" >
+        <form method="post" action="{% url 'bcard_page' %}" >
             {% csrf_token %}
             <label style="color: #4f049f; font-size: 20px;"> Введіть номер своєї банківської карти:</label>
              {{ form.beneficiary.bank_card_number }}
             <input type="text" name="card_number" id="card_number" maxlength="19" placeholder="0000 0000 0000 0000">
+            <input type="hidden" name="help_request_id" id="help_request_id"  value={{help_request_id}}>
             <label style="color: #893ade; font-size: 14px;margin-left: 5px;">  *Перевірте, чи правильно Ви ввели номер картки</label>
                 <div style="display: block; margin: 0 auto; width: max-content;">
                 <a class="btn btn-new btn-lg"style="margin-right: 15px;  margin-top: 20px;" href="{% url 'help_request_page' %}">відмінити</a>
-                <button class="btn btn-primary btn-lg"style=" margin-left: 15px;  margin-top: 20px;" href="{% url 'success_page' %}">відправити</button>
+                <button class="btn btn-primary btn-lg"style=" margin-left: 15px;  margin-top: 20px;" type="submit">відправити</button>
 
                 </div>
         </form>

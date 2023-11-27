@@ -48,10 +48,12 @@
             <h1> {{help_request.beneficiary.user.last_name}} {{help_request.beneficiary.user.first_name}}</h1><br>
             <p> Need: {{help_request.support_type}} help</p><br>
             <p> Text of request: {{help_request.contain_of_help}}</p><br>
+            {% if user.username != help_request.beneficiary.user.username %}
             {% if help_request.support_type == "Financial" %}
             <a href="{% url 'Financial_Donate' pk=help_request.id %}" class="btn btn-primary btn-lg"><i class="fas fa-money-bill"></i> Donate</a><br>
             {% else %}
             <a href="{% url 'Material_Donate' pk=help_request.id %}" class="btn btn-primary btn-lg"><i class="fas fa-box"></i> Donate</a><br>
+            {% endif %}
             {% endif %}
         </div>
     </div>

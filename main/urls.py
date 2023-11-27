@@ -33,7 +33,7 @@ urlpatterns = [
                   path('help_request_list/', views.help_request_list, name='help_request_list'),
 
                   path('help_request_page/', views.help_request_page, name='help_request_page'),
-                  path('success_page/', views.success_page, name='success_page'),
+
                   path('bcard/', views.bcard_page, name='bcard_page'),
 
                   path('beneficiary_card/<int:beneficiary_id>/', views.beneficiary_card, name='beneficiary_card'),

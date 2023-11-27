@@ -21,9 +21,7 @@ class UserRegistrationForm(forms.Form):
     password2 = forms.CharField(widget=forms.PasswordInput)
 
 
-
 class HelpRequestForm(ModelForm):
     class Meta:
         model = HelpRequest
-        fields = ['support_type', 'contain_of_help']
-
+        fields = ['support_type', 'contain_of_help', 'beneficiary']

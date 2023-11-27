@@ -1,0 +1,75 @@
+{% extends 'main/base._layout.html' %}
+
+{% block content %}
+<!DOCTYPE html>
+<html lang="uk-UK">
+<head>
+    <style>
+        body {
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .content-container {
+            flex-direction: column;
+            align-items: center;
+            margin-top: 20px;
+        }
+
+        .bg-custom {
+            background-color: #eac9f5 !important;
+        }
+
+        .card {
+            border: none;
+            padding: 10px;
+            border-radius: 8px;
+            margin-bottom: 30px;
+            width: 100%;
+        }
+
+        form {
+            max-width: 400px;
+            margin: auto;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+            color: #4f049f;
+            font-size: 16px;
+        }
+
+        select {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 16px;
+            box-sizing: border-box;
+            border: 1px solid #ced4da;
+            border-radius: 4px;
+            font-size: 16px;
+        }
+
+        button:hover {
+            background-color: #3c0371;
+        }
+
+
+    </style>
+
+</head>
+<body>
+    <div class="content-container">
+        <div class="card bg-custom text-white mb-4">
+            <h2 class="mb-4" style="color: #764ace; font-size: 32px;">Ваш запит на допомогу опубліковано!</h2>
+            <div>
+                <p style="color: #4f049f; font-size: 18px;">Ваш запит:  </p>
+                <h1 style="color: #4f049f; font-size: 18px;">{{new_request.beneficiary.user.last_name}} {{new_request.beneficiary.user.first_name}}</h1><br>
+                <p style="color: #4f049f; font-size: 18px;">Потрібна: {{new_request.support_type}} допомога</p><br>
+                <p style="color: #4f049f; font-size: 18px;">Опис допомоги: {{new_request.contain_of_help}}</p><br>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
+{% endblock %}

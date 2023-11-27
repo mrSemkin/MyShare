@@ -1,0 +1,89 @@
+{% extends 'main/base._layout.html' %}
+
+{% block content %}
+<!DOCTYPE html>
+<html lang="uk-UK">
+<head>
+    <style>
+        body {
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .content-container {
+            flex-direction: column;
+            align-items: center;
+            margin-top: 20px;
+        }
+
+        .bg-custom {
+            background-color: #eac9f5 !important;
+        }
+
+        .card {
+            border: none;
+            padding: 10px;
+            border-radius: 8px;
+            margin-bottom: 30px;
+            margin-top: 10px;
+            width: 100%;
+        }
+
+        form {
+            max-width: 400px;
+            margin: auto;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+            color: #4f049f;
+            font-size: 16px;
+        }
+
+        select {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 16px;
+            box-sizing: border-box;
+            border: 1px solid #ced4da;
+            border-radius: 4px;
+            font-size: 16px;
+        }
+
+        button:hover {
+            background-color: #3c0371;
+        }
+
+        .btn-new{
+          color: #807d85;
+          background-color: #d4d1d7;
+          border: solid #807d85 1px;
+          border-radius: 0.3rem ;
+        }
+
+    </style>
+</head>
+<body>
+
+    <div class="content-container">
+        <div class="card bg-custom text-white mb-4">
+            <h2 class="mb-4" style="color: #764ace;font-size: 32px;">Подати запит на допомогу</h2>
+            <form method="post">
+                {% csrf_token %}
+                <label style="color: #764ace;font-size: 20px;">Тип допомоги:</label>
+                {{ form.support_type }}
+                <label style="color: #764ace;font-size: 20px;">Опис допомоги, що потрібна:</label>
+                {{ form.contain_of_help }}
+            <div style="display: block; margin: 0 auto; width: max-content;">
+                <div>
+                    <a class="btn btn-new btn-lg"style="margin-right: 15px; margin-top: 25px; margin-bottom: 30px;" href="{% url 'index' %}">відмінити</a>
+                     <button type="submit" class="btn btn-primary btn-lg"style=" margin-left: 15px; margin-top: 25px; margin-bottom: 30px;">продовжити</button>
+                </div>
+            </div>
+            </form>
+        </div>
+    </div>
+</body>
+</html>
+{% endblock %}

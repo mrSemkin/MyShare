@@ -1,0 +1,52 @@
+{% extends 'main/base._layout.html' %}
+{% load static %}
+{% block content %}
+     <style>
+        .bg-help{
+            background-color: #eac9f5 !important;
+            border-radius: 10px;
+            height: 400px;
+            width: 1000px;
+            margin: auto;
+            margin-top: 50px;
+        }
+        .bank_inf{
+            color: #764ace;
+            text-align: center;
+        }
+         .bank_inf img {
+            opacity: 0;
+            transition: opacity 2s ease;
+        }
+        .bank_inf:hover img {
+            opacity: 1;
+        }
+        .bank_inf h1 {
+            margin: auto;
+            margin-top: 50px;
+        }
+        .bank_inf h3 {
+            margin: auto;
+            margin-top: 40px;
+        }
+        .Home-btn{
+            width:200px;
+            margin: auto;
+            margin-top: 70px;
+        }
+    </style>
+
+
+    <div class="bg-help">
+        <div class="bank_inf">
+             <img src="{% static 'main/img/Logo.png' %}" alt="">
+             <h1>Thanks for using our service</h1><br>
+             <h3>We all appreciate your contribution</h3>
+        <div class="Home-btn">
+            <a href="{% url 'home'%}"  class="btn btn-primary btn-lg"><i class="fas fa-home"></i> Home</a>
+        </div>
+        </div>
+    </div>
+
+
+{% endblock %}

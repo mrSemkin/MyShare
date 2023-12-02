@@ -240,9 +240,15 @@ def help_request_list(request):
 
 
 class MyCustomView(DetailView):
-    model = UserDonate
+    model = HelpRequest
     template_name = 'main/help_request_inf.html'
-    context_object_name = 'user_donate'
+    context_object_name = 'help_request'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        user_donate = UserDonate.objects.filter(help_request=self.object).first()
+        context['user_donate'] = user_donate
+        return context
 
 
 def donate_user(request, pk):

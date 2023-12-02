@@ -46,19 +46,22 @@
     </div>
     <div class="bg-help">
         <div class="help-request-list">
-            <h1> {{user_donate.help_request.beneficiary.user.last_name}}  {{user_donate.help_request.beneficiary.user.first_name}}</h1><br>
-            <p> Need: {{user_donate.help_request.support_type}} help</p><br>
-            <p> Text of request: {{user_donate.help_request.contain_of_help}}</p><br>
-            <p>This person have: {{user_donate.count_donate_times}} donates</p><br>
-            <p>Which contain: {{user_donate.count_donate_summ}} <i class="fas fa-hryvnia"></i></p><br>
-            {% if user.username != user_donate.help_request.beneficiary.user.username %}
-            {% if user_donate.help_request.support_type == "Financial" %}
-            <a href="{% url 'Financial_Donate' pk=user_donate.help_request.id %}" class="btn btn-primary btn-lg"><i
+            <h1>{{ help_request.beneficiary.user.last_name }} {{ help_request.beneficiary.user.first_name }}</h1><br>
+            <p> Need: {{ help_request.support_type }} help</p>
+            <p>Text of request: <span style="font-size: 22px;">{{ help_request.contain_of_help }}</span></p>
+            {% if user.username != help_request.beneficiary.user.username %}
+            {% if help_request.support_type == "Financial" %}
+            {% if user_donate %}
+            <p style="margin-top: 80px;">This person have: {{ user_donate.count_donate_times|default:'' }} donates</p>
+            <p>Which contain: {{ user_donate.count_donate_summ|default:'' }} <i class="fas fa-hryvnia"></i></p><br>
+            {% endif %}
+            <a href="{% url 'Financial_Donate' pk=help_request.id %}" class="btn btn-primary btn-lg"><i
                     class="fas fa-money-bill"></i> Donate</a><br>
             {% else %}
-            <a href="{% url 'Material_Donate' pk=user_donate.help_request.id %}" class="btn btn-primary btn-lg"><i
+            <a href="{% url 'Material_Donate' pk=help_request.id %}" class="btn btn-primary btn-lg"><i
                     class="fas fa-box"></i> Donate</a><br>
             {% endif %}
+
             {% endif %}
         </div>
     </div>

@@ -1,7 +1,7 @@
 import logging
 from django.db import models
 from django.contrib.auth import get_user_model
-
+from django.utils import timezone
 LOGGER = logging.getLogger(__name__)
 User = get_user_model()
 
@@ -76,3 +76,17 @@ class Help(models.Model):
     updated_at = models.DateTimeField(auto_now=True)
     donor = models.ForeignKey(Donor, on_delete=models.PROTECT)
     help_request = models.ForeignKey(HelpRequest, on_delete=models.PROTECT)
+
+
+class UserDonate(models.Model):
+    help_request = models.ForeignKey(HelpRequest, on_delete=models.PROTECT)
+    count_donate_summ = models.IntegerField(default=0)
+    count_donate_times = models.IntegerField(default=0)
+    last_donate_date = models.DateField(null=True, blank=True)
+
+    def add_donation(self, amount):
+        self.count_donate_summ += amount
+        self.count_donate_times += 1
+        self.last_donate_date = timezone.now()
+        self.save()
+        

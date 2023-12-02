@@ -39,7 +39,8 @@ urlpatterns = [
                   path('beneficiary_card/<int:beneficiary_id>/', views.beneficiary_card, name='beneficiary_card'),
 
                   path('help_request_list/<int:pk>/', views.MyCustomView.as_view(), name='HelpRequest_inf'),
-                  path('help_request_list/<int:pk>/donate_financial/', views.FinancialDonateView.as_view(),name='Financial_Donate'),
+                  path('help_request_list/<int:pk>/donate_financial/', views.donate_user, name='Financial_Donate'),
+                  path('help_request_list/success_page/', views.donate_success, name='Success_Donate'),
                   path('help_request_list/<int:pk>/donate_material/', views.MaterialDonateView.as_view(),name='Material_Donate'),
 
 

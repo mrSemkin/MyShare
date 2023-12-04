@@ -1,75 +1,52 @@
 {% extends 'main/base._layout.html' %}
-
+{% load static %}
 {% block content %}
-<!DOCTYPE html>
-<html lang="uk-UK">
-<head>
-    <style>
-        body {
-            flex-direction: column;
-            align-items: center;
-        }
-
-        .content-container {
-            flex-direction: column;
-            align-items: center;
-            margin-top: 20px;
-        }
-
-        .bg-custom {
+     <style>
+        .bg-help{
             background-color: #eac9f5 !important;
-        }
-
-        .card {
-            border: none;
-            padding: 10px;
-            border-radius: 8px;
-            margin-bottom: 30px;
-            width: 100%;
-        }
-
-        form {
-            max-width: 400px;
+            border-radius: 10px;
+            height: 400px;
+            width: 1000px;
             margin: auto;
+            margin-top: 50px;
         }
-
-        label {
-            display: block;
-            margin-bottom: 8px;
-            color: #4f049f;
-            font-size: 16px;
+        .bank_inf{
+            color: #764ace;
+            text-align: center;
         }
-
-        select {
-            width: 100%;
-            padding: 10px;
-            margin-bottom: 16px;
-            box-sizing: border-box;
-            border: 1px solid #ced4da;
-            border-radius: 4px;
-            font-size: 16px;
+         .bank_inf img {
+            opacity: 0;
+            transition: opacity 2s ease;
         }
-
-        button:hover {
-            background-color: #3c0371;
+        .bank_inf:hover img {
+            opacity: 1;
         }
-
-
+        .bank_inf h1 {
+            margin: auto;
+            margin-top: 50px;
+        }
+        .bank_inf h3 {
+            margin: auto;
+            margin-top: 40px;
+        }
+        .Home-btn{
+            width:200px;
+            margin: auto;
+            margin-top: 70px;
+        }
     </style>
 
-</head>
-<body>
-    <div class="content-container">
-        <div class="card bg-custom text-white mb-4">
-            <h2 class="mb-4" style="color: #764ace; font-size: 32px;">Ваш запит на допомогу опубліковано!</h2>
-            <div>
-                <p style="color: #4f049f; font-size: 18px;">Ваш запит:  </p>
-                <h1 style="color: #4f049f; font-size: 18px;">{{new_request.beneficiary.user.last_name}} {{new_request.beneficiary.user.first_name}}</h1><br>
-                <p style="color: #4f049f; font-size: 18px;">Потрібна: {{new_request.support_type}} допомога</p><br>
-                <p style="color: #4f049f; font-size: 18px;">Опис допомоги: {{new_request.contain_of_help}}</p><br>
-            </div>
+
+    <div class="bg-help">
+        <div class="bank_inf">
+             <img src="{% static 'main/img/Logo.png' %}" alt="">
+             <h1>Thanks for using our service</h1><br>
+             <h3>We all appreciate your contribution</h3>
+        <div class="Home-btn">
+            <a href="{% url 'home'%}"  class="btn btn-primary btn-lg"><i class="fas fa-home"></i> Home</a>
+        </div>
         </div>
     </div>
-</body>
-</html>
+
+
 {% endblock %}

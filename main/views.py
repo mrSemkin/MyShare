@@ -1,17 +1,16 @@
 from django.views.generic.base import View
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.http import HttpResponse
 from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth import authenticate
 from django.contrib.auth import login as auth_login
 from django import forms
 from django.shortcuts import render
-from .forms import UserLoginForm, HelpRequestForm
-from .forms import UserRegistrationForm
+from .forms import UserLoginForm, HelpRequestForm, UserDonateForm, UserRegistrationForm
 from django.contrib.auth import logout
 from django.contrib.auth.models import User
 from django.urls import reverse
-from .models import HelpRequest, Beneficiary, User
+from .models import HelpRequest, Beneficiary, User, UserDonate
 from django.views.generic import DetailView, TemplateView
 
 
@@ -235,7 +234,6 @@ def bcard_page(request):
     return render(request, 'main/bcard_page.html')
 
 
-
 def help_request_list(request):
     help_requests = HelpRequest.objects.filter(status=HelpRequest.ACTUAL, beneficiary__isnull=False)
     return render(request, 'main/help_request_list.html', {'help_requests': help_requests})
@@ -246,11 +244,39 @@ class MyCustomView(DetailView):
     template_name = 'main/help_request_inf.html'
     context_object_name = 'help_request'
 
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        user_donate = UserDonate.objects.filter(help_request=self.object).first()
+        context['user_donate'] = user_donate
+        return context
 
-class FinancialDonateView(DetailView):
-    model = HelpRequest
-    template_name = 'main/financial_donate.html'
-    context_object_name = 'financial'
+
+def donate_user(request, pk):
+    help_request = get_object_or_404(HelpRequest, id=pk)
+
+    user_donate, created = UserDonate.objects.get_or_create(
+        help_request=help_request
+    )
+
+    if request.method == 'POST':
+        form = UserDonateForm(request.POST)
+        if form.is_valid():
+            amount = form.cleaned_data['amount']
+            user_donate.add_donation(amount)
+            return redirect('Success_Donate')
+    else:
+        form = UserDonateForm()
+
+    inf = {
+        'form': form,
+        'help_request': help_request,
+        'user_donate': user_donate
+    }
+    return render(request, 'main/financial_donate.html', inf)
+
+
+def donate_success(request):
+    return render(request, 'main/success_page.html')
 
 
 class MaterialDonateView(DetailView):

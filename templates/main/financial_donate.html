@@ -1,14 +1,42 @@
 {% extends 'main/base._layout.html' %}
-
+{% load static %}
 {% block content %}
      <style>
-
+        .bg-help{
+            background-color: #eac9f5 !important;
+            border-radius: 10px;
+            height: 400px;
+            width: 1000px;
+            margin: auto;
+        }
+        .bank_inf{
+            color: #764ace;
+            text-align: center;
+        }
+        .bank_inf p{
+            margin-top: 100px;
+            font-size: 20px;
+        }
+        .Back-btn{
+            width:200px;
+        }
     </style>
 
-
-            <p>{{financial.beneficiary.user.last_name}} {{financial.beneficiary.user.first_name}}</p><br>
-
-            <p>Need: {{financial.support_type}} help</p><br>
+  <div class="Back-btn">
+        <a href="{% url 'help_request_list'%}"  class="btn btn-primary btn-lg"><i class="fas fa-list"></i> Back to list</a>
+    </div>
+    <div class="bg-help">
+        <div class="bank_inf">
+            <h2>{{help_request.beneficiary.user.last_name}} {{help_request.beneficiary.user.first_name}}</h2><br>
+            <h3>Bank card number: {{help_request.beneficiary.bank_card_number}}</h3><br>
+            <form method="POST">
+                {% csrf_token %}
+                <h4>{{ form.amount }} <i class="fas fa-hryvnia"></i></h4><br>
+                <button type="submit" class="btn btn-primary btn-lg">Donate</button>
+            </form>
+            <p>Write in the transaction description that you are from our service</p><br>
+        </div>
+    </div>
 
 
 {% endblock %}

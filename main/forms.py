@@ -25,3 +25,7 @@ class HelpRequestForm(ModelForm):
     class Meta:
         model = HelpRequest
         fields = ['support_type', 'contain_of_help', 'beneficiary']
+
+
+class UserDonateForm(forms.Form):
+    amount = forms.IntegerField()
